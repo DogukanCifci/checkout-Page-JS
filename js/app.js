@@ -120,8 +120,20 @@ function adetButton() {
 
     const arti = kutu.lastElementChild; //Bu da .adet-controller classli elementin son cocugu' da + butonu
 
+    //==========EKSI ISLEMI ===========
+
     eksi.addEventListener("click", () => {
       adet.textContent = adet.textContent - 1;
+
+      //0 oldugunda direk komple tüm ürünü ekrandan silme
+      if (adet.textContent < 1) {
+        let secim = prompt("Sileyim mi? Emin misin? (E/H)");
+        if (secim.toLocaleLowerCase() == "e")
+          removeSil(eksi); //silme fonksiyonuna yolladik
+        else {
+          adet.textContent = 1;
+        }
+      }
       //sepette de degistiricez
       sepettekiler.map((urun) => {
         if (
@@ -129,8 +141,17 @@ function adetButton() {
         ) {
           urun.adet--;
         }
+        let ürünToplam = eksi.closest(".card").querySelector(".ürün-toplam");
+        let ürünPrice = eksi
+          .closest(".card")
+          .querySelector(".indirim-price").textContent;
+
+        ürünToplam.textContent = (adet.textContent * ürünPrice).toFixed(2);
       });
     });
+
+    //ARTI ISLEMI
+
     arti.onclick = () => {
       adet.textContent = Number(adet.textContent) + 1;
 
