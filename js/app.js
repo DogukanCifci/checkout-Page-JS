@@ -132,6 +132,7 @@ function adetButton() {
           removeSil(eksi); //silme fonksiyonuna yolladik
         else {
           adet.textContent = 1;
+          return;
         }
       }
       //sepette de degistiricez
@@ -176,3 +177,5 @@ function adetButton() {
 }
 
 console.log(sepettekiler);
+
+const tablo = ``;
